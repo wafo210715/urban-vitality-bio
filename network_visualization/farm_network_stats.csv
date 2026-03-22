@@ -1,0 +1,143 @@
+farm_id,typology,phase,cluster,emphasis,food_connections,social_connections,cultural_connections
+0,podium,2,Low-Activity,Biodiversity Enhancement,0,0,0
+1,podium,2,Low-Activity,Biodiversity Enhancement,0,0,0
+2,podium,2,Socio-Economic,Cultural Activities,934,0,67
+3,podium,2,Low-Activity,Biodiversity Enhancement,0,0,0
+4,podium,1,Low-Activity,Biodiversity Enhancement,0,0,0
+5,podium,2,Low-Activity,Biodiversity Enhancement,0,0,0
+6,podium,1,Economic-Only,Social + Cultural Activities,1031,63,84
+7,podium,1,Economic-Only,Social + Cultural Activities,1027,63,85
+8,podium,3,Low-Activity,Biodiversity Enhancement,0,0,0
+9,podium,1,Economic-Only,Social + Cultural Activities,1012,49,72
+10,rooftops,1,Low-Activity,Biodiversity Enhancement,0,0,0
+11,rooftops,1,Low-Activity,Biodiversity Enhancement,0,0,0
+12,rooftops,2,Low-Activity,Biodiversity Enhancement,0,0,0
+13,rooftops,1,Economic-Only,Social + Cultural Activities,1533,53,80
+14,rooftops,1,Low-Activity,Biodiversity Enhancement,0,0,0
+15,rooftops,3,Low-Activity,Biodiversity Enhancement,0,0,0
+16,rooftops,3,Low-Activity,Biodiversity Enhancement,0,0,0
+17,rooftops,1,Economic-Only,Social + Cultural Activities,1111,29,39
+18,rooftops,1,Economic-Only,Social + Cultural Activities,1099,29,39
+19,rooftops,1,Socio-Economic,Cultural Activities,1118,0,39
+20,rooftops,1,Low-Activity,Biodiversity Enhancement,0,0,0
+21,rooftops,1,Low-Activity,Biodiversity Enhancement,0,0,0
+22,rooftops,1,Low-Activity,Biodiversity Enhancement,0,0,0
+23,rooftops,2,Economic-Only,Social + Cultural Activities,1290,70,100
+24,rooftops,1,Economic-Only,Social + Cultural Activities,1307,75,100
+25,rooftops,1,Economic-Only,Social + Cultural Activities,1293,74,102
+26,rooftops,2,Low-Activity,Biodiversity Enhancement,0,0,0
+27,rooftops,1,Low-Activity,Biodiversity Enhancement,0,0,0
+28,rooftops,1,Low-Activity,Biodiversity Enhancement,0,0,0
+29,rooftops,1,Economic-Only,Social + Cultural Activities,1521,50,81
+30,streetscapes,1,Low-Activity,Biodiversity Enhancement,0,0,0
+31,streetscapes,1,Low-Activity,Biodiversity Enhancement,0,0,0
+32,streetscapes,1,Low-Activity,Biodiversity Enhancement,0,0,0
+33,streetscapes,2,Low-Activity,Biodiversity Enhancement,0,0,0
+34,streetscapes,2,Low-Activity,Biodiversity Enhancement,0,0,0
+35,streetscapes,2,Low-Activity,Biodiversity Enhancement,0,0,0
+36,streetscapes,2,Low-Activity,Biodiversity Enhancement,0,0,0
+37,streetscapes,2,Low-Activity,Biodiversity Enhancement,0,0,0
+38,streetscapes,1,Low-Activity,Biodiversity Enhancement,0,0,0
+39,streetscapes,1,Low-Activity,Biodiversity Enhancement,0,0,0
+40,streetscapes,1,Low-Activity,Biodiversity Enhancement,0,0,0
+41,streetscapes,1,Low-Activity,Biodiversity Enhancement,0,0,0
+42,streetscapes,1,Low-Activity,Biodiversity Enhancement,0,0,0
+43,streetscapes,1,Low-Activity,Biodiversity Enhancement,0,0,0
+44,streetscapes,1,Low-Activity,Biodiversity Enhancement,0,0,0
+45,streetscapes,1,Low-Activity,Biodiversity Enhancement,0,0,0
+46,streetscapes,1,Low-Activity,Biodiversity Enhancement,0,0,0
+47,streetscapes,1,Low-Activity,Biodiversity Enhancement,0,0,0
+48,streetscapes,3,Low-Activity,Biodiversity Enhancement,0,0,0
+49,streetscapes,1,Low-Activity,Biodiversity Enhancement,0,0,0
+50,streetscapes,2,Low-Activity,Biodiversity Enhancement,0,0,0
+51,streetscapes,3,Low-Activity,Biodiversity Enhancement,0,0,0
+52,streetscapes,3,Low-Activity,Biodiversity Enhancement,0,0,0
+53,streetscapes,3,Low-Activity,Biodiversity Enhancement,0,0,0
+54,streetscapes,1,Low-Activity,Biodiversity Enhancement,0,0,0
+55,streetscapes,1,Low-Activity,Biodiversity Enhancement,0,0,0
+56,streetscapes,1,Low-Activity,Biodiversity Enhancement,0,0,0
+57,streetscapes,1,Low-Activity,Biodiversity Enhancement,0,0,0
+58,streetscapes,1,Economic-Only,Social + Cultural Activities,1413,70,109
+59,streetscapes,1,Economic-Only,Social + Cultural Activities,1433,75,110
+60,streetscapes,1,Low-Activity,Biodiversity Enhancement,0,0,0
+61,streetscapes,2,Economic-Only,Social + Cultural Activities,1461,77,109
+62,streetscapes,1,Socio-Economic,Cultural Activities,1419,0,105
+63,streetscapes,1,Cultural-Economic,Social Activities,1456,74,0
+64,streetscapes,1,Low-Activity,Biodiversity Enhancement,0,0,0
+65,streetscapes,1,Economic-Only,Social + Cultural Activities,1303,77,103
+66,streetscapes,1,Economic-Only,Social + Cultural Activities,1340,78,102
+67,streetscapes,2,Low-Activity,Biodiversity Enhancement,0,0,0
+68,streetscapes,2,Low-Activity,Biodiversity Enhancement,0,0,0
+69,streetscapes,1,Economic-Only,Social + Cultural Activities,966,66,71
+70,streetscapes,1,Low-Activity,Biodiversity Enhancement,0,0,0
+71,streetscapes,2,Socio-Economic,Cultural Activities,955,0,72
+72,streetscapes,2,Low-Activity,Biodiversity Enhancement,0,0,0
+73,streetscapes,2,Low-Activity,Biodiversity Enhancement,0,0,0
+74,streetscapes,1,Economic-Only,Social + Cultural Activities,1291,70,97
+75,streetscapes,1,Economic-Only,Social + Cultural Activities,1310,77,104
+76,streetscapes,1,Economic-Only,Social + Cultural Activities,1298,76,103
+77,streetscapes,2,Low-Activity,Biodiversity Enhancement,0,0,0
+78,streetscapes,3,Low-Activity,Biodiversity Enhancement,0,0,0
+79,streetscapes,1,Economic-Only,Social + Cultural Activities,1171,71,95
+80,streetscapes,2,Low-Activity,Biodiversity Enhancement,0,0,0
+81,streetscapes,2,Socio-Economic,Cultural Activities,995,0,75
+82,streetscapes,2,Low-Activity,Biodiversity Enhancement,0,0,0
+83,streetscapes,2,Low-Activity,Biodiversity Enhancement,0,0,0
+84,streetscapes,3,Low-Activity,Biodiversity Enhancement,0,0,0
+85,streetscapes,2,Low-Activity,Biodiversity Enhancement,0,0,0
+86,streetscapes,3,Low-Activity,Biodiversity Enhancement,0,0,0
+87,streetscapes,3,Low-Activity,Biodiversity Enhancement,0,0,0
+88,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+89,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+90,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+91,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+92,green_spaces,1,Low-Activity,Biodiversity Enhancement,0,0,0
+93,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+94,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+95,green_spaces,2,Low-Activity,Biodiversity Enhancement,0,0,0
+96,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+97,green_spaces,2,Low-Activity,Biodiversity Enhancement,0,0,0
+98,green_spaces,1,Economic-Only,Social + Cultural Activities,1188,28,56
+99,green_spaces,1,Economic-Only,Social + Cultural Activities,1152,31,42
+100,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+101,green_spaces,4,Low-Activity,Biodiversity Enhancement,0,0,0
+102,green_spaces,2,Low-Activity,Biodiversity Enhancement,0,0,0
+103,green_spaces,2,Low-Activity,Biodiversity Enhancement,0,0,0
+104,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+105,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+106,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+107,green_spaces,1,Low-Activity,Biodiversity Enhancement,0,0,0
+108,green_spaces,1,Low-Activity,Biodiversity Enhancement,0,0,0
+109,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+110,green_spaces,1,Low-Activity,Biodiversity Enhancement,0,0,0
+111,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+112,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+113,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+114,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+115,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+116,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+117,green_spaces,1,Economic-Only,Social + Cultural Activities,1318,79,103
+118,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+119,green_spaces,2,Low-Activity,Biodiversity Enhancement,0,0,0
+120,green_spaces,1,Low-Activity,Biodiversity Enhancement,0,0,0
+121,green_spaces,1,Low-Activity,Biodiversity Enhancement,0,0,0
+122,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+123,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+124,green_spaces,2,Economic-Only,Social + Cultural Activities,1020,25,36
+125,green_spaces,1,Low-Activity,Biodiversity Enhancement,0,0,0
+126,green_spaces,1,Low-Activity,Biodiversity Enhancement,0,0,0
+127,green_spaces,2,Low-Activity,Biodiversity Enhancement,0,0,0
+128,green_spaces,1,Socio-Economic,Cultural Activities,888,0,63
+129,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+130,green_spaces,1,Low-Activity,Biodiversity Enhancement,0,0,0
+131,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+132,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+133,green_spaces,1,Economic-Only,Social + Cultural Activities,1074,27,37
+134,green_spaces,2,Low-Activity,Biodiversity Enhancement,0,0,0
+135,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+136,green_spaces,1,Economic-Only,Social + Cultural Activities,1074,27,37
+137,green_spaces,2,Low-Activity,Biodiversity Enhancement,0,0,0
+138,green_spaces,1,Low-Activity,Biodiversity Enhancement,0,0,0
+139,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0
+140,green_spaces,1,Low-Activity,Biodiversity Enhancement,0,0,0
+141,green_spaces,3,Low-Activity,Biodiversity Enhancement,0,0,0

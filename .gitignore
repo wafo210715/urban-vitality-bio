@@ -1,0 +1,79 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# API Keys and Secrets
+*.env
+.env
+.env.local
+*.key
+secrets.json
+credentials.json
+
+# Cache directories (API responses, downloaded photos)
+cache/
+*.cache
+
+# Large generated outputs
+farm_reports/
+network_visualization/*.shp
+network_visualization/*.shx
+network_visualization/*.dbf
+network_visualization/*.prj
+network_visualization/*.cpg
+
+# Demo outputs
+demo/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Data files (optional - uncomment if you don't want to track large data)
+# data/*.shp
+# data/*.dbf
+# farm/*.geojson

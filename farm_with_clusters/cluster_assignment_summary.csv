@@ -1,0 +1,14 @@
+typology,cluster,cluster_label,count
+podium,1,Low-Activity,6
+podium,2,Socio-Economic,1
+podium,3,Economic-Only,3
+rooftops,1,Low-Activity,12
+rooftops,2,Socio-Economic,1
+rooftops,3,Economic-Only,7
+streetscapes,0,Cultural-Economic,1
+streetscapes,1,Low-Activity,44
+streetscapes,2,Socio-Economic,3
+streetscapes,3,Economic-Only,10
+green_spaces,1,Low-Activity,47
+green_spaces,2,Socio-Economic,1
+green_spaces,3,Economic-Only,6
