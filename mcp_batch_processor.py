@@ -59,8 +59,8 @@ def get_pending_restaurants() -> List[Dict]:
     return pending
 
 
-def save_analysis_report(restaurant: Dict, analyses: List[Dict]):
-    """Save analysis report for a restaurant"""
+def save_analysis_report(restaurant: Dict, analyses: List[Dict], photo_files: List[str] = None):
+    """Save analysis report for a restaurant with full schema matching existing reports"""
     rest_dir = Path(restaurant['dir'])
 
     # Aggregate results
@@ -81,41 +81,87 @@ def save_analysis_report(restaurant: Dict, analyses: List[Dict]):
             try:
                 analysis = json.loads(analysis)
             except:
-                continue
+                analysis = {}
         if isinstance(analysis, list) and analysis:
             analysis = analysis[0]
         if not isinstance(analysis, dict):
-            continue
+            analysis = {}
 
-        photo_analysis.append({
+        # Build photo analysis entry matching existing schema
+        photo_entry = {
             'photo_index': i + 1,
-            **analysis
-        })
+            'is_food': analysis.get('is_food', False),
+            'dish_name': analysis.get('dish_name'),
+            'cuisine_type': analysis.get('cuisine_type'),
+        }
+
+        # Handle visible_ingredients - could be array of strings or objects
+        visible_ingredients = analysis.get('visible_ingredients', [])
+        if visible_ingredients:
+            photo_entry['visible_ingredients'] = visible_ingredients
+            # Extract ingredient names for aggregation
+            for ing in visible_ingredients:
+                if isinstance(ing, dict):
+                    name = ing.get('name', '')
+                    if name:
+                        all_ingredients.add(name)
+                elif isinstance(ing, str):
+                    all_ingredients.add(ing)
+
+        # Handle farmable_in_singapore - extract items from nested structure
+        farmable_data = analysis.get('farmable_in_singapore', {})
+        photo_entry['farmable_in_singapore'] = farmable_data
+
+        for cat in ['leafy_greens', 'herbs', 'aromatics', 'vegetables']:
+            cat_data = farmable_data.get(cat, {})
+            if isinstance(cat_data, dict):
+                items = cat_data.get('items', [])
+            else:
+                items = cat_data if isinstance(cat_data, list) else []
+            if isinstance(items, list):
+                farmable[cat].update(items)
+
+        # Handle growing_recommendations
+        recs_data = analysis.get('growing_recommendations', {})
+        photo_entry['growing_recommendations'] = recs_data
+
+        for rec_type in ['best_for_rooftop', 'best_for_podium', 'best_for_streetscape', 'quick_wins']:
+            items = recs_data.get(rec_type, [])
+            if isinstance(items, list):
+                recommendations[rec_type].update(items)
+
+        # Add optional fields if present
+        if analysis.get('local_sourcing_potential'):
+            photo_entry['local_sourcing_potential'] = analysis['local_sourcing_potential']
+        if 'vegetarian_friendly' in analysis:
+            photo_entry['vegetarian_friendly'] = analysis['vegetarian_friendly']
+        if analysis.get('notes'):
+            photo_entry['notes'] = analysis['notes']
+
+        # Add photo file path
+        if photo_files and i < len(photo_files):
+            photo_entry['photo_file'] = photo_files[i]
+
+        photo_analysis.append(photo_entry)
 
         if analysis.get('cuisine_type'):
             all_cuisines.add(analysis['cuisine_type'])
 
-        for cat in ['leafy_greens', 'herbs', 'aromatics', 'vegetables']:
-            items = analysis.get('farmable_in_singapore', {}).get(cat, [])
-            if isinstance(items, list):
-                farmable[cat].update(items)
-
-        for rec_type in ['best_for_rooftop', 'best_for_podium', 'best_for_streetscape', 'quick_wins']:
-            items = analysis.get('growing_recommendations', {}).get(rec_type, [])
-            if isinstance(items, list):
-                recommendations[rec_type].update(items)
-
+    # Build full report matching existing schema
     report = {
         'name': restaurant['name'],
-        'lat': restaurant['lat'],
-        'lon': restaurant['lon'],
-        'place_id': restaurant['place_id'],
-        'photos_analyzed': len(analyses),
+        'lat': restaurant.get('lat'),
+        'lon': restaurant.get('lon'),
+        'place_id': restaurant.get('place_id'),
+        'photos_analyzed': len([a for a in photo_analysis if a.get('is_food') or a.get('dish_name')]),
         'photo_analysis': photo_analysis,
-        'cuisine_types': list(all_cuisines),
+        'photo_files': photo_files or [],
+        'aggregated_ingredients': sorted(list(all_ingredients)),
+        'cuisine_types': sorted(list(all_cuisines)),
+        'errors': [],
+        'image_dir': restaurant['dir'],
         'farmable_ingredients': {k: sorted(list(v)) for k, v in farmable.items()},
-        'growing_recommendations': {k: sorted(list(v)) for k, v in recommendations.items()},
-        'image_dir': restaurant['dir']
+        'growing_recommendations': {k: sorted(list(v)) for k, v in recommendations.items()}
     }
 
     report_path = rest_dir / "analysis_report.json"

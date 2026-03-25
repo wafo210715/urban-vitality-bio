@@ -113,7 +113,8 @@ def is_servable(analysis):
 def aggregate_farm_data(farm_gdf):
     """Aggregate all data for Phase 1 farms."""
     farms_data = []
-    all_restaurants = {}
+    all_restaurants = {}  # Only servable restaurants (for backward compatibility)
+    all_analyzed_restaurants = {}  # ALL analyzed restaurants (for GeoJSON export)
     crop_counter = defaultdict(int)
     total_analyzed = 0
     total_servable = 0
@@ -228,9 +229,29 @@ def aggregate_farm_data(farm_gdf):
                 'growing_recommendations': growing
             }
 
-            # Store in global restaurants dict
+            # Store in global restaurants dict (servable only, for backward compatibility)
             rest_key = f"{farm_id}_{rest_name}"
             all_restaurants[rest_key] = restaurant_data
+
+            # Store ALL analyzed restaurants with farm association (for GeoJSON export)
+            if rest_name not in all_analyzed_restaurants:
+                all_analyzed_restaurants[rest_name] = {
+                    'name': rest_name,
+                    'lat': rest_lat,
+                    'lon': rest_lon,
+                    'farm_ids': [farm_id],
+                    'distances': {str(farm_id): actual_distance},
+                    'cuisine_types': cuisines,
+                    'is_servable': servable,
+                    'can_provide': can_provide,
+                    'cannot_provide': cannot_provide,
+                    'farmable_ingredients': farmable,
+                    'growing_recommendations': growing
+                }
+            else:
+                # Restaurant already exists, add this farm association
+                all_analyzed_restaurants[rest_name]['farm_ids'].append(farm_id)
+                all_analyzed_restaurants[rest_name]['distances'][str(farm_id)] = actual_distance
 
             if servable:
                 total_servable += 1
@@ -286,6 +307,7 @@ def aggregate_farm_data(farm_gdf):
     return {
         'farms': farms_data,
         'restaurants': all_restaurants,
+        'all_analyzed_restaurants': all_analyzed_restaurants,
         'summary': summary
     }
 
