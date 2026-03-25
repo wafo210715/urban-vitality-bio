@@ -2,15 +2,48 @@
 
 This project analyzes potential urban farm sites in Singapore's Downtown Core, connecting them to nearby food/retail POIs and recommending crops to grow based on restaurant menu analysis and local biodiversity data.
 
-## Overview
+## Methodology Overview
 
-The project uses a multi-phase approach to identify urban farming opportunities:
+### 1. Spatial Data Pipeline
 
-1. **Spatial Analysis**: Identify farm sites by typology (podium, rooftops, streetscapes, green_spaces)
-2. **Network Analysis**: Connect farms to nearby POIs within walking distance (400m/800m)
-3. **Biodiversity Analysis**: Incorporate iNaturalist species observations
-4. **Restaurant Analysis**: Use VLM (Vision Language Model) to analyze restaurant photos and identify farmable ingredients
-5. **Crop Recommendations**: Generate crop recommendations based on restaurant demand and local growing conditions
+| Stage | Script | Method |
+|-------|--------|--------|
+| Data Acquisition | `fetch_inat.py`, `fetch_fishnet_area.py` | iNaturalist species data + fishnet grid tessellation |
+| Diversity Analysis | `calculate_diversity.py` | Shannon Diversity Index: H' = -Σ(pᵢ × ln(pᵢ)) |
+| Spatial Clustering | `cluster_analysis.py` | K-Means (k=4) on normalized activity dimensions |
+| Farm Assignment | `assign_clusters_to_farms.py`, `assign_phases_to_farms.py` | Area-weighted spatial overlay |
+
+### 2. Core Analysis
+
+**Farm Micro-Analysis** (`farm_micro_analysis.py`):
+- Walking distance thresholds: 400m (primary), 800m (secondary)
+- Species buffer: 1200m radius for biodiversity inventory
+- POI matching: 10m accuracy threshold
+
+**Species Recommendation** (`species_classifier.py`):
+- LLM-powered classification (indigenous/invasive/edible)
+- Priority: Indigenous+Edible > Indigenous OR Edible > Non-invasive
+
+**Restaurant Intelligence** (`restaurant_vlm_analyzer.py`):
+- Google Places API → fetch restaurant photos
+- VLM analysis → identify farmable ingredients
+- Crop categorization: leafy greens, herbs, aromatics, vegetables
+
+### 3. Cluster-Based Connection Strategy
+
+| Cluster | Connects To | Focus |
+|---------|-------------|-------|
+| Cultural-Economic | Food, Social | Social activities |
+| Economic-Only | Food, Social, Cultural | All activities |
+| Socio-Economic | Food, Cultural | Cultural activities |
+| Low-Activity | None | Biodiversity only |
+
+### 4. Development Phasing
+
+1. **Phase 1** - Aggressive (highest vitality areas)
+2. **Phase 2** - High Priority
+3. **Phase 3** - Medium Priority
+4. **Phase 4** - Later Phase
 
 ## Project Structure
 
@@ -20,18 +53,31 @@ urban-vitality-bio/
 ├── farm/                    # Farm geometry inputs
 ├── json/                    # POI data (food, social, cultural)
 ├── cache/                   # API response cache and downloaded photos
-├── farm_reports/            # Generated per-farm JSON analysis reports
 ├── farm_with_clusters/      # Farm data with cluster/phase assignments
-├── network_visualization/   # Network connection maps and statistics
-├── demo/                    # Demo visualization outputs
+├── network_visualization/   # Network connection GeoJSON files
 │
-├── farm_micro_analysis.py   # Core farm analysis module
-├── visualize_network.py     # Network visualization script
-├── automate_phase1.py       # Restaurant photo download automation
-├── batch_mcp_analyzer.py    # VLM batch analysis script
-├── prepare_demo_data.py     # Demo data aggregation
-├── visualize_farm_demo.py   # Interactive map generation
-└── restaurant_vlm_analyzer.py # VLM photo analysis module
+│  # Core Pipeline Scripts
+├── fetch_inat.py            # iNaturalist data acquisition
+├── fetch_fishnet_area.py    # Fishnet grid generation
+├── calculate_diversity.py   # Shannon diversity calculation
+├── cluster_analysis.py      # K-Means clustering
+├── assign_clusters_to_farms.py
+├── assign_phases_to_farms.py
+│
+│  # Core Analysis Modules
+├── farm_micro_analysis.py   # Main farm analysis engine
+├── restaurant_vlm_analyzer.py # VLM photo analysis
+├── google_places_client.py  # Google Places API wrapper
+├── species_classifier.py    # Species classification
+│
+│  # Visualization
+├── visualize_network.py     # Network visualization
+├── visualize_micro_analysis.py
+├── automate_phase1.py       # Photo download automation
+│
+│  # Batch Processing (see note below)
+├── batch_mcp_analyzer.py    # VLM batch analysis entry point
+└── mcp_batch_processor.py   # Batch processing logic
 ```
 
 ## Key Commands
@@ -54,54 +100,22 @@ python automate_phase1.py
 
 # Batch analyze photos via VLM
 python batch_mcp_analyzer.py --batch-size 5 --limit 10
-
-# Generate demo visualization
-python prepare_demo_data.py
-python visualize_farm_demo.py
 ```
 
-## Architecture
+## Batch Processing Note
 
-### Data Pipeline
+Due to MCP (Model Context Protocol) call rate limits, VLM photo analysis is performed in batches using temporary scripts (`save_batch*.py`, `process_remaining.py`, etc.). These scripts are **not part of the core methodology** but serve as practical workarounds for API constraints. The entry point for batch processing is:
 
-1. **iNaturalist Data** (`fetch_inat.py`) → Species observations for biodiversity analysis
-2. **Fishnet Grid** (`fetch_fishnet_area.py`) → Spatial tessellation for clustering
-3. **Diversity Calculation** (`calculate_diversity.py`) → Shannon diversity index per grid cell
-4. **Cluster Analysis** (`cluster_analysis.py`) → Categorize areas by activity type
-5. **Farm Assignment** (`assign_clusters_to_farms.py`, `assign_phases_to_farms.py`) → Link farms to clusters and development phases
+```bash
+python batch_mcp_analyzer.py --batch-size 5 --limit 10
+```
 
-### Analysis Modules
-
-- **`FarmMicroAnalyzer`** (farm_micro_analysis.py) - Core class that analyzes individual farm sites
-- **`RestaurantPhotoAnalyzer`** (restaurant_vlm_analyzer.py) - Fetches and analyzes restaurant photos with VLM
-- **`GooglePlacesClient`** (google_places_client.py) - Wrapper for Google Places API with caching
+Batch scripts are excluded from version control via `.gitignore` but can be regenerated if needed.
 
 ## Coordinate Systems
 
 - **Projected**: EPSG:32648 (UTM Zone 48N) - for distance calculations
 - **Geographic**: EPSG:4326 (WGS84) - for API calls and GeoJSON output
-
-## Key Thresholds
-
-- Walking distance: 400m (5-minute walk), 800m (10-minute walk)
-- Species buffer: 1200m around each farm
-- POI matching: 10m threshold for connection attribution
-
-## Cluster Types
-
-| Cluster | Connects To | Focus |
-|---------|-------------|-------|
-| Cultural-Economic | Food, Social | Social activities |
-| Economic-Only | Food, Social, Cultural | All activities |
-| Socio-Economic | Food, Cultural | Cultural activities |
-| Low-Activity | None | Biodiversity only |
-
-## Phase Priority
-
-1. Phase 1 - Aggressive (highest priority)
-2. Phase 2 - High Priority
-3. Phase 3 - Medium Priority
-4. Phase 4 - Later Phase
 
 ## Environment Variables
 
@@ -117,30 +131,16 @@ Primary: geopandas, pandas, numpy, shapely, requests, matplotlib
 
 API integrations: Google Places API, Anthropic/VLM API (via MCP tools)
 
-## Demo Visualization
+## Findings
 
-The demo visualization (`demo/farm_demo.html`) shows:
-- Phase 1 farm locations with typologies
-- Servable restaurants (those where ingredients can be locally grown)
-- Connection lines between farms and restaurants
-- Crop recommendations per farm
-
-Open in browser after running:
-```bash
-python prepare_demo_data.py
-python visualize_farm_demo.py
-```
-
-## Recent Fixes
-
-### Farm ID Mismatch (March 2026)
-
-Fixed a critical bug where network connections used DataFrame index instead of actual FID column, causing:
-- Restaurants to be associated with wrong farms
-- VLM analysis to process restaurants for wrong farms
-
-The fix ensures `farm_id` in network connections correctly maps to the FID column in farm geometries.
+*To be added with visualizations from `network_visualization/`.*
 
 ## License
 
 MIT License
+
+> **TODO**: Document data sources and their licenses:
+> - iNaturalist observations (CC0/CC-BY/CC-BY-NC)
+> - Singapore government open data
+> - Google Places API terms of use
+> - Any other third-party datasets

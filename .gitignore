@@ -56,6 +56,38 @@ network_visualization/*.cpg
 # Demo outputs
 demo/
 
+# Temporary batch processing scripts (workarounds for MCP call limits)
+# These are kept for reference but not tracked in version control
+auto_fix_reports.py
+auto_mcp_analyzer.py
+batch_analyze_photos.py
+batch_mcp_analyzer.py
+batch_mcp_fix.py
+batch_missing_reports.py
+batch_process_all.py
+batch_processor_v2.py
+export_arcgis_layers.py
+generate_missing_reports.py
+mcp_analyze_photos.py
+mcp_batch_processor.py
+mcp_batch_progress.py
+photo_downloader.py
+prepare_demo_data.py
+process_batches.py
+process_remaining.py
+run_farm6_test.py
+run_phase1.py
+save_batch*.py
+visualize_farm_demo.py
+
+# Temporary batch data files
+pending_*.json
+malformed_restaurants.json
+vlm_prompt_templates.md
+
+# ArcGIS export directory
+arcgis_layers/
+
 # Jupyter Notebooks
 .ipynb_checkpoints/
 
