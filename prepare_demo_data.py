@@ -294,6 +294,15 @@ def aggregate_farm_data(farm_gdf):
 
         farms_data.append(farm_data)
 
+    # Deduplicate farms_data by farm_id (source file has duplicate geometries with different typologies)
+    seen_farm_ids = set()
+    unique_farms_data = []
+    for farm in farms_data:
+        if farm['farm_id'] not in seen_farm_ids:
+            seen_farm_ids.add(farm['farm_id'])
+            unique_farms_data.append(farm)
+    farms_data = unique_farms_data
+
     # Calculate summary statistics
     summary = {
         'total_phase1_farms': len(farms_data),
